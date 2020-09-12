@@ -1,4 +1,4 @@
-package com.company;
+package com.company.pr1_2;
 
 public class array_two {
 

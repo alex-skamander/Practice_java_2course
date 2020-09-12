@@ -1,4 +1,4 @@
-package com.company;
+package com.company.pr1_4;
 
 public class garm {
     public static void main(String[] args) {

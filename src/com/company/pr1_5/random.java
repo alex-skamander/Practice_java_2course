@@ -1,4 +1,4 @@
-package com.company;
+package com.company.pr1_5;
 
 public class random {
     public static void bubbleSort(int[] arr){

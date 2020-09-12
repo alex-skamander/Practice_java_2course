@@ -1,5 +1,4 @@
-package com.company;
-import java.util.Scanner;
+package com.company.pr1_1;
 
 public class args {
     public static void main(String[] args) {
