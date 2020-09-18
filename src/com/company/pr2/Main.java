@@ -12,7 +12,7 @@ public class Main {
         while(!(name.equals("stop"))) {
             age = scan.nextInt();
             Dog dog_ = new Dog(name, age);
-            System.out.println(dog_.ageDog(age));
+            System.out.println(dog_.ageHuman());
             System.out.println(dog_.toString());
             DOG.Add(name, age);
             name = scan.next();
