@@ -10,8 +10,7 @@ public class MovableCircle extends Circle implements Movable {
     }
 
     @Override
-    public void move(int x, int y)
-    {
+    public void move(int x, int y) {
         center.move(x, y);
     }
 
