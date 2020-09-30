@@ -8,7 +8,7 @@ public class Person {
     public Person() {
     }
 
-    public void byFurniture(Furniture obj){
+    public void buyFurniture(Furniture obj){
         basket.add(obj);
     }
 

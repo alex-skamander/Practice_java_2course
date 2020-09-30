@@ -3,14 +3,12 @@ package com.company.pr7_1;
 public abstract class Furniture {
     private double price;
     private String color;
-    private String size;
     private String manufacturer;
     private String material;
 
-    public Furniture(double price, String color, String size, String manufacturer, String material) {
+    public Furniture(double price, String color, String manufacturer, String material) {
         this.price = price;
         this.color = color;
-        this.size = size;
         this.manufacturer = manufacturer;
         this.material = material;
     }
@@ -21,10 +19,6 @@ public abstract class Furniture {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public void setManufacturer(String manufacturer) {
@@ -39,10 +33,6 @@ public abstract class Furniture {
         return color;
     }
 
-    public String getSize() {
-        return size;
-    }
-
     public String getManufacturer() {
         return manufacturer;
     }
@@ -51,7 +41,6 @@ public abstract class Furniture {
     public String toString() {
         return "Цена =" + price +
                 ", цвет ='" + color + '\'' +
-                ", размер ='" + size + '\'' +
                 ", производитель ='" + manufacturer + '\''+
                 ", материал ='"+material+'\'';
     }

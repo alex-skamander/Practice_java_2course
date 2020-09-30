@@ -6,8 +6,8 @@ public class Table extends Furniture {
     private double width;
     private double height;
 
-    public Table(double price, String color, String size, String manufacturer, String material, int legNumber, double length, double width, double height) {
-        super(price, color, size, manufacturer, material);
+    public Table(double price, String color, String manufacturer, String material, int numberLeg, double length, double width, double height) {
+        super(price, color, manufacturer, material);
         this.numberLeg = numberLeg;
         this.length = length;
         this.width = width;

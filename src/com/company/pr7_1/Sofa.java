@@ -4,8 +4,8 @@ public class Sofa extends Furniture {
     private Boolean isUnfolds;
     private double numberSeats;
 
-    public Sofa(double price, String color, String size, String manufacturer, String material, Boolean isUnfolds, double numberSeats) {
-        super(price, color, size, manufacturer, material);
+    public Sofa(double price, String color, String manufacturer, String material, Boolean isUnfolds, double numberSeats) {
+        super(price, color, manufacturer, material);
         this.isUnfolds = isUnfolds;
         this.numberSeats = numberSeats;
     }
