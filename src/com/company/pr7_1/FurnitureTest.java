@@ -3,7 +3,6 @@ package com.company.pr7_1;
 import java.util.Scanner;
 
 public class FurnitureTest {
-    Scanner scanner = new Scanner(System.in);
     public static void main(String args[]){
         FurnitureShop myShop = new FurnitureShop();
         Person me = new Person();
