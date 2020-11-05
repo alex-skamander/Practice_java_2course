@@ -1,57 +1,94 @@
 package com.company.pr14;
-
-import com.company.pr14.Student1;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
-public class SortingStudents implements Comparator<Student1> {
-    private ArrayList<Student1> students;
+public class SortingStudents implements Comparator  {
 
-    private void quickSort(ArrayList<Student1> students, int low, int high) {
-        this.students = students;
+    public Comparator binarySearch(Comparator []student, Comparator elementToSearch){
+        int firstIndex = 0;
+        int lastIndex = student.length - 1;
+        while(firstIndex <= lastIndex){
+            int middleIndex = (firstIndex + lastIndex) / 2;
+            if (student[middleIndex].equals(elementToSearch)){
+                return student[middleIndex];
+            }
+            else if (student[middleIndex].compare(student[middleIndex],1) < elementToSearch.compare(elementToSearch,1))
+                firstIndex = middleIndex+1;
+            else if (student[middleIndex].compare(student[middleIndex],1) > elementToSearch.compare(elementToSearch,1))
+                lastIndex = middleIndex -1 ;
+        }
+        return null;
+    }
+    public  Comparator recursiveBinarySearch(Comparator []student,int firstElement,int lastElement,Comparator elementToSearch){
+        if (lastElement >= firstElement){
+            int mid = firstElement + (lastElement - firstElement) /2;
+            if (student[mid].equals(elementToSearch)){
+                return student[mid];
+            }
 
-        if (students.size() == 0)
+            if (compare((Student1)student[mid],(Student1)elementToSearch) >0){
+                return recursiveBinarySearch(student,firstElement,mid-1,elementToSearch);
+
+            }
+            return recursiveBinarySearch(student,mid+1,lastElement,elementToSearch);
+        }
+        return null;
+    }
+    public void quicksort(Student1[]students, int low, int high){
+        if (students.length == 0){
             return;
-        if (low >= high)
+        }
+        if (low >= high){
             return;
-
-        int middle = low + (high - low) / 2;
-        Student1 prop = students.get(middle);
-
+        }
+        int middle = low +(high - low)/2;
+        Student1 student = students[middle];
         int i = low, j = high;
-        while (i <= j) {
-            while (compare(students.get(i), prop) > 0)
+        while (i <= j){
+            while (compare(students[i],student)>0 ){
                 i++;
-            while (compare(students.get(j), prop) < 0)
+            }
+            while (compare(students[j],student) <0){
                 j--;
-            if (i <= j) {
-                Collections.swap(students, i, j);
+            }
+            if (i <= j){
+                Student1 temp = students[i];
+                students[i] = students[j];
+                students[j] = temp;
                 i++;
                 j--;
             }
-            if (low < j)
-                quickSort(students, low, j);
-            if (high > i)
-                quickSort(students, i, high);
+            if ( low < j ){
+                quicksort(students,low,j);
+            }
+            if (high > i ){
+                quicksort(students,i,high);
+            }
         }
-    }
 
-    public SortingStudents(ArrayList<Student1> students) {
-        this.students = students;
-        int low = 0, high = students.size() - 1;
-        quickSort(students, low, high);
+    }
+    public Comparator linearSearch(Comparator []students,Comparator elementToSearch){
+        for (int index = 0; index <students.length; index ++){
+            if (students[index].equals(elementToSearch)){
+                return students[index];
+            }
+        }
+        return null;
+    }
+    public Comparator recursialinearSearch(Comparator []students,Comparator elementToSearch,int index){
+        if (students[index].equals(elementToSearch)){
+            return students[index];
+
+        }
+        index++;
+        if (students.length == index){
+            return null;
+        }
+        return recursialinearSearch(students,elementToSearch,index);
+
     }
 
     @Override
-    public int compare(Student1 o1, Student1 o2) {
-        return Integer.compare(o1.getRating(), o2.getRating());
-    }
-
-    public void PrintList() {
-        for (Student1 s : students) {
-            System.out.println("Student " + s.getName() + ": id" + s.getId() + ", rating is " + s.getRating());
-        }
+    public int compare(Object o1, Object o2) {
+        return ((Student1)o1).getID() - ((Student1)o2).getID();
     }
 }

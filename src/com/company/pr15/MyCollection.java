@@ -1,50 +1,85 @@
 package com.company.pr15;
-import java.util.ArrayList;
+import java.util.Arrays;
 
-class MyCollection extends ArrayList<Integer> {
-    public int getIndex(int index) {
-        return get(index);
+public class MyCollection {
+    private int[] mass;
+
+    public MyCollection(int... numbers) {
+        mass = numbers;
     }
 
-    @Override
-    public boolean add(Integer value) {
-        for (int i = 0; i < size(); i++) {
-            set(i, get(i) + value);
+    public void add(int x){
+        int[] buff = new int[mass.length + 1];
+        for(int i = 0;i < mass.length; ++i){
+            buff[i] = mass[i];
         }
-        return super.add(value);
+        buff[mass.length] = x;
+        mass = buff;
     }
 
-    public boolean remove(Integer value) {
-        for (int j = 0; j < size(); j++) {
-            set(j, get(j) - value);
+    public void remove(int x){
+        for(int i = 0;i < mass.length; ++i){
+            if(mass[i] == x){
+                int[] buff = new int[mass.length - 1];
+                for(int j = i;j < mass.length - 1; ++j){
+                    mass[j] = mass[j + 1];
+                }
+                for(int k = 0;k < mass.length - 1; ++k){
+                    buff[k] = mass[k];
+                }
+                mass = buff;
+                break;
+            }
         }
-        return super.remove(value);
     }
 
-    public double getAverage(){
+    public int search(int value){
+        for(int i = 0;i < mass.length; ++i){
+            if(mass[i] == value){
+                return mass[i];
+            }
+        }
+        return 0;
+    }
+
+    public int searchIndex(int index){
+        if(index < mass.length && index > 0){
+            return mass[index];
+        }
+        return 0;
+    }
+
+    public int max(){
+        int buff = mass[0];
+        for(int i : mass){
+            if(i > buff){
+                buff = i;
+            }
+        }
+        return buff;
+    }
+
+    public int min(){
+        int buff = mass[0];
+        for(int i : mass){
+            if(i < buff){
+                buff = i;
+            }
+        }
+        return buff;
+    }
+
+    public double average(){
         int sum = 0;
-        double avg;
-        for(int i = 0; i < size(); i++)
-            sum += getIndex(i);
-        avg = sum / size();
-        return avg;
-    }
-
-    public int maxValue(){
-        int max = 0;
-        for(int i = 0; i < size(); i++) {
-            if (getIndex(i) > max)
-                max = getIndex(i);
+        for(int i : mass){
+            sum += i;
         }
-        return max;
+        return (double) sum / mass.length;
     }
-
-    public int minValue(){
-        int min = getIndex(0);
-        for(int i = 0; i < size(); i++) {
-            if (getIndex(i) < min)
-                min = getIndex(i);
-        }
-        return min;
+    @Override
+    public String toString() {
+        return "MyCollection{" +
+                "mass=" + Arrays.toString(mass) +
+                '}';
     }
 }

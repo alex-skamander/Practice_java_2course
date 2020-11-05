@@ -1,83 +1,63 @@
 package com.company.pr14;
 
-import com.company.pr13.SortingStudentsByGPA;
-import com.company.pr13.Student;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
-    public static int getRandomId() {
-        int min = 100;
-        int max = 1000;
-        int difference = max - min;
+    public static void main(String []args){
+        SortingStudents sort = new SortingStudents();
+        Student1 found;
+        Student1 a = new Student1(90);
+
+        System.out.println("Быстрая сортировка.\nВведите колличество студентов");
+        Scanner scanner = new Scanner(System.in);
+        int k = scanner.nextInt();
+        System.out.println("Введите баллы студентов");
+        Student1[] students = new Student1[k];
+        for (int i = 0; i < students.length; i++){
+            int m = scanner.nextInt();
+            students[i] = new Student1(m);
+        }
+        sort.quicksort(students,0,students.length - 1);
+        System.out.println("Отсортированный массив по убыванию");
+        for(int i = 0; i < students.length; i++){
+            System.out.print(students[i].getID() + " ");
+        }
+        System.out.println();
+        if (sort.recursialinearSearch(students, a,0) == null)
+            System.out.println("Такого числа не нашлось");
+        else{
+            found =(Student1)sort.recursialinearSearch(students, a,0);
+            System.out.println("Число нашлось "+found.getID());
+        }
         Random random = new Random();
-        int i = random.nextInt(difference + 1);
-        i += min;
-        return i;
-    }
+        int l = 4000;
+        students = new Student1[l];
 
-    public static int getRandomRate() {
-        int min = 1;
-        int max = 10;
-        int difference = max - min;
-        Random random = new Random();
-        int i = random.nextInt(difference + 1);
-        i += min;
-        return i;
-    }
+        for (int i = 0; i < students.length; i++){
 
-    public static void mergeSort(int[] a, int b, int c) {
-        if (c <= b)
-            return;
-        int mid = b + (c - b) / 2;
-        mergeSort(a, b, mid);
-        mergeSort(a, mid + 1, c);
-        int[] buf = Arrays.copyOf(a, a.length);
-        for (int k = b; k <= c; k++)
-            buf[k] = a[k];
-        int i = b, j = mid + 1;
-        for (int k = b; k <= c; k++) {
-            if (i > mid) {
-                a[k] = buf[j];
-                j++;
-            } else if (j > c) {
-                a[k] = buf[i];
-                i++;
-            } else if (buf[j] < buf[i]) {
-                a[k] = buf[j];
-                j++;
-            } else {
-                a[k] = buf[i];
-                i++;
-            }
+            students[i] = new Student1(i);
         }
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student("Кудряшова", getRandomId(), getRandomRate()));
-        students.add(new Student("Бутко", getRandomId(), getRandomRate()));
-        students.add(new Student("Зверев", getRandomId(), getRandomRate()));
-        students.add(new Student("Корольков", getRandomId(), getRandomRate()));
-        int[] idNumber = new int[students.size()];
-        for (int i = 0; i < students.size(); i++) {
-            Student s = students.get(i);
-            idNumber[i] = s.getId();
-        }
-        System.out.println("Students");
-        for (int i = 0; i < students.size(); i++) {
-            Student s = students.get(i);
-            System.out.println("Student " + s.getName() + ": id" + s.getId() + ", rating is " + s.getRating());
-        }
-        mergeSort(idNumber, 0, idNumber.length - 1);
-        System.out.println("\nSorted id numbers: ");
-        for (int i = 0; i < idNumber.length; i++) {
-            System.out.println("id" + idNumber[i]);
-            SortingStudentsByGPA sortGrades = new SortingStudentsByGPA(students);
-            System.out.println("\nStudents sorted by grades:");
-            sortGrades.PrintList();
-        }
+        sort.quicksort(students,0,students.length - 1);
+        long start = System.nanoTime();
+        found = (Student1)sort.binarySearch(students,a);
+        long finish = System.nanoTime();
+        long time = finish - start;
+        System.out.println("Время работы бинарнаного поиска обычным методом: "+ String.format("%,12d", time));
+        start = System.nanoTime();
+        found = (Student1)sort.recursialinearSearch(students, a,0);
+        finish = System.nanoTime();
+        time = finish - start;
+        System.out.println("Время работы бинарнаного поиска рекурсивным методом: "+ String.format("%,12d", time));
+        start = System.nanoTime();
+        found = (Student1)sort.linearSearch(students, a);
+        finish = System.nanoTime();
+        time = finish - start;
+        System.out.println("Время работы линейного поиска обычным методом: "+ String.format("%,12d", time));
+        start = System.nanoTime();
+        found = (Student1)sort.recursialinearSearch(students, a,0);
+        finish = System.nanoTime();
+        time = finish - start;
+        System.out.println("Время работы линейного поиска рекурсивным методом: "+ String.format("%,12d", time));
     }
 }
