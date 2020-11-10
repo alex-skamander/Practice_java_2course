@@ -5,10 +5,10 @@ import javax.swing.*;
 public class MainWindow extends JFrame {
 
     public MainWindow(){
-        setTitle("Это гусеница");
+        setTitle("Гусеничка хочет кушать \uD83D\uDC1B");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(320,345);
-        setLocation(400,400);
+        setSize(340,365);
+        setLocation(420,420);
         add(new GameField());
         setVisible(true);
     }
