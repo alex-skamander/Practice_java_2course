@@ -19,6 +19,7 @@ public class GameField extends JPanel implements ActionListener{
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
     private int dots;
+    private int count;
     private Timer timer;
     private boolean left = false;
     private boolean right = true;
@@ -53,9 +54,9 @@ public class GameField extends JPanel implements ActionListener{
     }
 
     public void loadImages(){
-        ImageIcon iia = new ImageIcon("src/apple2.png");
+        ImageIcon iia = new ImageIcon("src/apple.png");
         apple = iia.getImage();
-        ImageIcon iid = new ImageIcon("src/cir2.png");
+        ImageIcon iid = new ImageIcon("src/dot.png");
         dot = iid.getImage();
     }
 
@@ -69,10 +70,10 @@ public class GameField extends JPanel implements ActionListener{
             }
         } else{
             String str = "Game Over";
-            //Font f = new Font("Arial",14,Font.BOLD);
+            String cou = "Кол-во очков: "  + count;
             g.setColor(Color.white);
-            // g.setFont(f);
-            g.drawString(str,125,SIZE/2);
+            g.drawString(str, 125,SIZE/3);
+            g.drawString(cou, 125,SIZE/2);
         }
     }
 
@@ -96,6 +97,7 @@ public class GameField extends JPanel implements ActionListener{
     public void checkApple(){
         if(x[0] == appleX && y[0] == appleY){
             dots++;
+            count++;
             createApple();
         }
     }
@@ -127,7 +129,6 @@ public class GameField extends JPanel implements ActionListener{
             checkApple();
             checkCollisions();
             move();
-
         }
         repaint();
     }
